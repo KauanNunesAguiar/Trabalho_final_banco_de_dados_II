@@ -3,7 +3,7 @@
 ### Grupo E
 
 ### Integrantes:
-<h5>Kauan Nunes Aguiar - @KauanNunesAguiar</h5>
+<p>Kauan Nunes Aguiar - @KauanNunesAguiar</p>
 Michel Almeida da Rosa - @L3mitch
 
 Por favor, adicionem o resto
