@@ -26,5 +26,6 @@ Banco de dados utilizado SQL Server versão 2022 - Azure.<br>
 <code>1 arquivo SQL por objeto</code>
   
 ### Código do sistema:
-Linguagem de Programação C# .NET.<br>
+Responsável: Kauan Nunes Aguiar
+Linguagem de Programação Python ou C++ (em decisão) .NET.<br>
 <code>código fonte da aplicação</code>
