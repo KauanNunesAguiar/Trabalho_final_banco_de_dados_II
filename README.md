@@ -7,6 +7,7 @@ Kauan Nunes Aguiar - @KauanNunesAguiar<br>
 Michel Almeida da Rosa - @L3mitch<br>
 Elias Enns - @EliasEnns<br>
 Yuri Mazzuchello Candiotto - @Yuri-Candiotto
+
 Suyane Bonfanti dos Santos - @suyane924
 Por favor, adicionem o resto
 
