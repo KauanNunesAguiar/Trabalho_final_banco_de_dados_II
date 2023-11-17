@@ -3,9 +3,8 @@
 ### Grupo E
 
 ### Integrantes:
-<p>Kauan Nunes Aguiar - @KauanNunesAguiar</p>
-Michel Almeida da Rosa - @L3mitch
-
+Kauan Nunes Aguiar - @KauanNunesAguiar<br>
+Michel Almeida da Rosa - @L3mitch<br>
 Por favor, adicionem o resto
 
 ### Modelo Físico:
