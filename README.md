@@ -4,6 +4,7 @@
 
 ### Integrantes:
 Kauan Nunes Aguiar - @KauanNunesAguiar
+Michel Almeida da Rosa - @L3mitch
 Por favor, adicionem o resto
 
 ### Modelo Físico:
