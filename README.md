@@ -11,25 +11,30 @@ Suyane Bonfanti dos Santos - @suyane924<br>
 
 
 ### Modelo Físico:
+Responsável: @Yuri-Candiotto<br>
 Utilizado https://dbdiagram.io/<br>
 Arquivo fonte: <code>link pro arquivo</code><br>
 <code>Imagem</code>
   
 ### Dicionário de Dados:
+Responsável: @suyane924<br>
 <code>Excel ou tabela do Github (markdown)</code>
 
 ### Scripts DDL Criação do Database:
-Banco de dados utilizado SQL Server versão 2022 - Azure.<br>
+Responsável: @Yuri-Candiotto<br>
+Banco de dados utilizado SQL Server versão 2022 - Azure<br>
 <code>1 arquivo SQL por objeto</code>
 
 ### Scripts Popula tabelas:
-Banco de dados utilizado SQL Server versão 2022 - Azure.<br>
+Responsável: @EliasEnns<br>
 <code>1 arquivo SQL por objeto</code>
 
 ### Objetos de BD (stored procedure, triggers e functions):
+Responsável: @L3mitch<br>
 <code>1 arquivo SQL por objeto</code>
   
 ### Código do sistema:
-Responsável: Kauan Nunes Aguiar
-Linguagem de Programação Python ou C++ (em decisão) .NET.<br>
+Responsável: @KauanNunesAguiar<br>
+Linguagem de Programação Python<br>
+Biblioteca: SQLAlchemy<br>
 <code>código fonte da aplicação</code>
