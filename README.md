@@ -28,17 +28,17 @@ Este é o procedimento para criação do banco de dados [SQL Server usando o SQL
 
 Abaixo, segue os scripts SQL separados por tipo:
 + DDL [ddl.sql](scripts_sql/ddl.sql)<br>
-Responsável: @Yuri-Candiotto<br>
+- Responsável: @Yuri-Candiotto<br>
 + Índices [indices.sql](scripts_sql/indices.sql)<br>
-Responsável: TBD<br>
+- Responsável: TBD<br>
 + DML [dml.sql](scripts_sql/dml.sql)<br>
-Responsável: @EliasEnns<br>
+- Responsável: @EliasEnns<br>
 + Triggers [triggers.sql](scripts_sql/triggers.sql)<br>
-Responsável: @L3mitch<br>
+- Responsável: @L3mitch<br>
 + Stored Procedures [stored_procedures.sql](scripts_sql/stored_procedures.sql)<br>
-Responsável: @L3mitch<br>
+- Responsável: @L3mitch<br>
 + Functions [functions.sql](scripts_sql/functions.sql)<br>
-Responsável: @L3mitch<br>
+- Responsável: @L3mitch<br>
 
 
 ### Scripts DDL Criação do Database:
