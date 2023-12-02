@@ -27,17 +27,17 @@ Para este projeto foi utilizado o banco de dados [SQL Server 2022](https://www.m
 Este é o procedimento para criação do banco de dados [SQL Server usando o SQL Server Management Studio ou o Transact-SQL](https://learn.microsoft.com/pt-br/sql/relational-databases/databases/create-a-database?view=sql-server-ver16) <br>
 
 Abaixo, segue os scripts SQL separados por tipo:
-+ DDL [ddl.sql](scripts_sql/ddl.sql)
++ DDL [ddl.sql](scripts_sql/ddl.sql)<br>
 Responsável: @Yuri-Candiotto<br>
-+ Índices [indices.sql](scripts_sql/indices.sql)
-Responsável: TBD 
-+ DML [dml.sql](scripts_sql/dml.sql)
++ Índices [indices.sql](scripts_sql/indices.sql)<br>
+Responsável: TBD<br>
++ DML [dml.sql](scripts_sql/dml.sql)<br>
 Responsável: @EliasEnns<br>
-+ Triggers [triggers.sql](scripts_sql/triggers.sql)
++ Triggers [triggers.sql](scripts_sql/triggers.sql)<br>
 Responsável: @L3mitch<br>
-+ Stored Procedures [stored_procedures.sql](scripts_sql/stored_procedures.sql)
++ Stored Procedures [stored_procedures.sql](scripts_sql/stored_procedures.sql)<br>
 Responsável: @L3mitch<br>
-+ Functions [functions.sql](scripts_sql/functions.sql)
++ Functions [functions.sql](scripts_sql/functions.sql)<br>
 Responsável: @L3mitch<br>
 
 
