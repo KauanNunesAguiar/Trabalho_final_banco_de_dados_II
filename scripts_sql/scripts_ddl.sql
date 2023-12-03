@@ -28,7 +28,7 @@ CREATE TABLE Agendamento (
  ID_Paciente INT NOT NULL,
  ID_Fisioterapeuta INT NOT NULL,
  Data_Hora DATETIME NOT NULL,
- Duracao INT NOT NULL,
+ Duracao TIME NOT NULL,
  Observacoes TEXT,
  FOREIGN KEY (ID_Paciente) REFERENCES Paciente(ID_Paciente),
  FOREIGN KEY (ID_Fisioterapeuta) REFERENCES Fisioterapeuta(ID_Fisioterapeuta)
@@ -60,7 +60,7 @@ CREATE TABLE Pagamento (
  ID_Paciente INT NOT NULL,
  Valor DECIMAL(10,2) NOT NULL,
  Data_Pagamento DATE NOT NULL,
- Metodo_Pagamento VARCHAR(50) NOT NULL,
+ Metodo_Pagamento CHAR(1) NOT NULL CONSTRAINT chk_pag CHECK (Metodo_Pagamento IN  ('C', 'D', 'E', 'P')),
  FOREIGN KEY (ID_Paciente) REFERENCES Paciente(ID_Paciente)
 );
 
