@@ -19,7 +19,7 @@ Arquivo fonte: [Modelo Fisico](https://dbdiagram.io/d/656e62bf56d8064ca0604658).
 
 ### Dicionário de Dados
 Responsável: @suyane924<br>
-As informações sobre as tabelas e índices foram documentados na planilha [template1.xlsx](dicionario_dados/template1.xlsx).
+As informações sobre as tabelas e índices foram documentados na planilha [Dicionario-de-Dados.xlsx](dicionario_dados/Dicionario-de-Dados.xlsx).
 
 ### Scripts SQL
 Para este projeto foi utilizado o banco de dados [SQL Server 2022](https://www.microsoft.com/pt-br/sql-server/sql-server-downloads) <br>
