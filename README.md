@@ -48,8 +48,8 @@ Abaixo, segue os scripts SQL separados por tipo:
 ### Código Fonte do CRUD
 - Linguagem de Programação: Phyton
 - Biblioteca: SQLAlchemy
+- Link: [Codigo Fonte](codigo_CRUD/main.py)
 - Responsável: @KauanNunesAguiar
-- [Codigo Fonte](codigo_CRUD/main.py)
 
 ### Relatório Final
 O relatório final está disponível no arquivo [template1.docx](relatorio/template1.docx).
