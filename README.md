@@ -12,9 +12,10 @@ Suyane Bonfanti dos Santos - @suyane924<br>
 ### Modelo Físico
 Responsável: @Yuri-Candiotto<br>
 Utilizamos a ferramenta de modelagem de dados [dbdiagram.io](https://dbdiagram.io/) para criação do modelo físico do banco de dados, para posterior exportação dos scripts DDL das tabelas e relacionamentos.<br>
-Arquivo fonte: [Modelo Fisico](https://dbdiagram.io/d/6561325e3be1495787b1c71a).<br>
+Arquivo fonte: [Modelo Fisico](https://dbdiagram.io/d/656e62bf56d8064ca0604658).<br>
 
-![image](https://github.com/jlsilva01/projeto_final_bd2_satc_2023/assets/484662/1fefa9fd-868c-4209-8cc5-d32cd73fa46d)
+![ModeloFisico-PDF](https://github.com/KauanNunesAguiar/Trabalho_final_banco_de_dados_II/assets/141968186/cc277aae-dc14-4e84-b2be-ad883ffb099f)
+
 
 ### Dicionário de Dados
 Responsável: @suyane924<br>
