@@ -33,7 +33,7 @@ Abaixo, segue os scripts SQL separados por tipo:
 + Link: [indices.sql](scripts_sql/indices.sql)
 + Responsável: A ser definido
 #### DML 
-+ Link: [dml.sql](scripts_sql/dml.sql)
++ Link: [dml.sql](scripts_sql/scripts_dml.sql)
 + Responsável: @EliasEnns
 #### Triggers 
 + Link: [triggers.sql](scripts_sql/triggers.sql)
