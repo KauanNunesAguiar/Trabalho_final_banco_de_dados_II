@@ -1,4 +1,4 @@
-CREATE FUNCTION ContPag (@tipo VARCHAR)
+CREATE FUNCTION ContPag (@tipo VARCHAR(1))
 RETURNS INT
 AS
 BEGIN
@@ -7,20 +7,37 @@ BEGIN
     RETURN @numero;
 END;
 
+DECLARE @contagem INT;
+EXEC @contagem = ContPag 'p';
+SELECT @contagem;
 
-create proc NameFis (@Pes varchar, @Enc varchar output) as
-begin
-	select @Enc = Nome from Fisioterapeuta
-	where Nome = @Pes
-	select @Enc
-end
+--DROP FUNCTION ContPag;
+
+CREATE PROC eptChk AS
+BEGIN
+	update Tratamento set Procedimentos = 'Fisioterapeuta não escreveu nenhum procedimento, em caso de dúvidas envie um E-mail para: doloris.fisioterapia@gmail.com'
+	where Procedimentos IS NULL
+END
+
+--DROP PROCEDURE eptChk;
+
+CREATE PROCEDURE NameFis 
+    @Pes VARCHAR(255), 
+    @Enc VARCHAR(255) OUTPUT
+AS
+BEGIN
+    SELECT @Enc = Nome FROM Fisioterapeuta
+    WHERE Nome = @Pes;
+END;
+
+DECLARE @Pes VARCHAR(255), @Enc VARCHAR(255);
+
+EXEC NameFis 'Ana Pereira', @Enc OUTPUT;
+
+SELECT @Enc;
 
 
-declare @Pes varchar, @Enc varchar
-
-exec testSaida 'Ana Pereira', @Enc output
-
-select @Enc
+--DROP PROCEDURE NameFis;
 
 create trigger upd_seg on usuario for update
 as
@@ -36,6 +53,9 @@ begin
 end
 
 select * from usuario
+
 begin tran
 update Usuario set nome = 'NomeErrado' where nome like '%'
 rollback
+
+--DROP TRIGGER upd_seg ON usuario;
