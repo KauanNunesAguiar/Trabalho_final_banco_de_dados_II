@@ -30,8 +30,8 @@ Abaixo, segue os scripts SQL separados por tipo:
 + Link: [ddl.sql](scripts_sql/scripts_ddl.sql)
 + Responsável: @Yuri-Candiotto
 #### Índices 
-+ Link: [indices.sql](scripts_sql/indices.sql)
-+ Responsável: A ser definido
++ Link: [indices.sql](consultasComIndices)
++ Responsável: @L3mitch
 #### DML 
 + Link: [dml.sql](scripts_sql/scripts_dml.sql)
 + Responsável: @EliasEnns
