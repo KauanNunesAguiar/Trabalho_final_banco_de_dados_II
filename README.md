@@ -29,12 +29,12 @@ Abaixo, segue os scripts SQL separados por tipo:
 #### DDL 
 + Link: [ddl.sql](scripts_sql/scripts_ddl.sql)
 + Responsável: @Yuri-Candiotto
-#### Índices 
-+ Link: [indices.sql](consultasComIndices)
-+ Responsável: @L3mitch
 #### DML 
 + Link: [dml.sql](scripts_sql/scripts_dml.sql)
 + Responsável: @EliasEnns
+#### Índices 
++ Link: [indices.sql](consultasComIndices)
++ Responsável: @L3mitch
 #### Triggers 
 + Link: [triggers.sql](scripts_sql/triggers.sql)
 - Responsável: @L3mitch
