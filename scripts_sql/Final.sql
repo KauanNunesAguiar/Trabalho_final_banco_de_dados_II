@@ -30,12 +30,12 @@ begin
 	select @count = count(*) from inserted
 	if (@count > 1)
 	begin
-		raiserror(N'OPERA«√O N√O PERMITIDA', 16, 0, @count)
+		raiserror(N'OPERA√á√ÉO N√ÉO PERMITIDA', 16, 0, @count)
 		rollback tran
 	end
 end
 
 select * from usuario
 begin tran
-update Usuario set nome = 'burro' where nome like 'pedro%'
+update Usuario set nome = 'NomeErrado' where nome like '%'
 rollback
