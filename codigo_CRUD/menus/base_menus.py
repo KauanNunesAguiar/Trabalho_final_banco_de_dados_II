@@ -95,7 +95,10 @@ def obter_nivel_acesso():
 def obter_conteudo():
     while True:
         conteudo = input("Digite o conteudo: ")
-        if len(conteudo) <= CONTEUDO_MAX_LENGTH:
+        if conteudo.includes('--'):
+            print(f"Valor inválido. Tente novamente.")
+            
+        elif len(conteudo) <= CONTEUDO_MAX_LENGTH:
             return conteudo
         else:
             print(f"Conteudo deve ter no máximo {CONTEUDO_MAX_LENGTH} caracteres. Tente novamente.")
@@ -130,7 +133,9 @@ def obter_metodo_pagamento():
 def obter_nome():
     while True:
         nome = input("Digite o nome: ")
-        if len(nome) <= NOME_MAX_LENGTH:
+        if "--" in nome or ";" in nome:
+            print(f"Valor inválido. Tente novamente.")
+        elif len(nome) <= NOME_MAX_LENGTH:
             return nome
         else:
             print(f"Nome deve ter no máximo {NOME_MAX_LENGTH} caracteres. Tente novamente.")
@@ -148,7 +153,9 @@ def obter_valor():
 def obter_procedimentos():
     while True:
         procedimentos = input("Digite os procedimentos: ")
-        if len(procedimentos) <= PROCEDIMENTO_MAX_LENGTH:
+        if "--" in procedimentos or ";" in procedimentos:
+            print(f"Valor inválido. Tente novamente.")
+        elif len(procedimentos) <= PROCEDIMENTO_MAX_LENGTH:
             return procedimentos
         else:
             print(f"Procedimentos devem ter no máximo {PROCEDIMENTO_MAX_LENGTH} caracteres. Tente novamente.")
@@ -157,7 +164,9 @@ def obter_procedimentos():
 def obter_diagnostico():
     while True:
         diagnostico = input("Digite o diagnóstico: ")
-        if len(diagnostico) <= DIAGNOSTICO_MAX_LENGTH:
+        if "--" in diagnostico or ";" in diagnostico:
+            print(f"Valor inválido. Tente novamente.")
+        elif len(diagnostico) <= DIAGNOSTICO_MAX_LENGTH:
             return diagnostico
         else:
             print(f"Diagnóstico deve ter no máximo {DIAGNOSTICO_MAX_LENGTH} caracteres. Tente novamente.")
@@ -166,7 +175,9 @@ def obter_diagnostico():
 def obter_descricao():
     while True:
         descricao = input("Digite a descrição: ")
-        if len(descricao) <= DESCRICAO_MAX_LENGTH:
+        if "--" in descricao or ";" in descricao:
+            print(f"Valor inválido. Tente novamente.")
+        elif len(descricao) <= DESCRICAO_MAX_LENGTH:
             return descricao
         else:
             print(f"Descrição deve ter no máximo {DESCRICAO_MAX_LENGTH} caracteres. Tente novamente.")
@@ -175,7 +186,9 @@ def obter_descricao():
 def obter_telefone():
     while True:
         telefone = input("Digite o telefone: ")
-        if len(telefone) == TELEFONE_MAX_LENGTH:
+        if "--" in telefone or ";" in telefone:
+            print(f"Valor inválido. Tente novamente.")
+        elif len(telefone) == TELEFONE_MAX_LENGTH:
             return telefone
         else:
             print(f"Telefone exatamente {TELEFONE_MAX_LENGTH} caracteres. Tente novamente.")
@@ -184,7 +197,9 @@ def obter_telefone():
 def obter_tratamento_anterior():
     while True:
         tratamento_anterior = input("Digite o tratamento anterior: ")
-        if len(tratamento_anterior) <= TRATAMENTO_ANTERIOR_MAX_LENGTH:
+        if "--" in tratamento_anterior or ";" in tratamento_anterior:
+            print(f"Valor inválido. Tente novamente.")
+        elif len(tratamento_anterior) <= TRATAMENTO_ANTERIOR_MAX_LENGTH:
             return tratamento_anterior
         else:
             print(f"Tratamento anterior deve ter no máximo {TRATAMENTO_ANTERIOR_MAX_LENGTH} caracteres. Tente novamente.")
@@ -193,7 +208,9 @@ def obter_tratamento_anterior():
 def obter_email():
     while True:
         email = input("Digite o e-mail: ")
-        if len(email) <= EMAIL_MAX_LENGTH:
+        if "--" in email or ";" in email or not email.includes('@'):
+            print(f"Valor inválido. Tente novamente.")
+        elif len(email) <= EMAIL_MAX_LENGTH:
             return email
         else:
             print(f"E-mail deve ter no máximo {EMAIL_MAX_LENGTH} caracteres. Tente novamente.")
@@ -202,7 +219,9 @@ def obter_email():
 def obter_endereco():
     while True:
         endereco = input("Digite o endereço: ")
-        if len(endereco) <= ENDERECO_MAX_LENGTH:
+        if "--" in endereco or ";" in endereco:
+            print(f"Valor inválido. Tente novamente.")
+        elif len(endereco) <= ENDERECO_MAX_LENGTH:
             return endereco
         else:
             print(f"Endereço deve ter no máximo {ENDERECO_MAX_LENGTH} caracteres. Tente novamente.")
@@ -211,7 +230,9 @@ def obter_endereco():
 def obter_especialidade():
     while True:
         especialidade = input("Digite a especialidade: ")
-        if len(especialidade) <= ESPECIALIDADE_MAX_LENGTH:
+        if "--" in especialidade or ";" in especialidade:
+            print(f"Valor inválido. Tente novamente.")
+        elif len(especialidade) <= ESPECIALIDADE_MAX_LENGTH:
             return especialidade
         else:
             print(f"Especialidade deve ter no máximo {ESPECIALIDADE_MAX_LENGTH} caracteres. Tente novamente.")
@@ -220,7 +241,9 @@ def obter_especialidade():
 def obter_observacoes():
     while True:
         observacoes = input("Digite as observações: ")
-        if len(observacoes) <= OBSERVACOES_MAX_LENGTH:
+        if "--" in observacoes:
+            print(f"Valor inválido. Tente novamente.")
+        elif len(observacoes) <= OBSERVACOES_MAX_LENGTH:
             return observacoes
         else:
             print(f"Observações devem ter no máximo {OBSERVACOES_MAX_LENGTH} caracteres. Tente novamente.")

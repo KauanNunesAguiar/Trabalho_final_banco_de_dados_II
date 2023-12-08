@@ -27,12 +27,11 @@ def menu_relatorios():
 def menu_criar_relatorio():
     print("\nCriar novo relatorio")
     id_paciente = obter_id('Paciente')
-    id_tratamento = obter_id('Tratamento')
     conteudo = obter_conteudo()
     data_criacao = obter_data()
     
-    if verificar_dados_relatorio(session, id_paciente, id_tratamento, data_criacao, conteudo):
-        relatorio = criar_relatorio(session, id_paciente, id_tratamento, data_criacao, conteudo)
+    if verificar_dados_relatorio(session, id_paciente, data_criacao, conteudo):
+        relatorio = criar_relatorio(session, id_paciente, data_criacao, conteudo)
         print(f"Relatorio criado com sucesso. ID: {relatorio.ID_Relatorio}")
     else:
         print("Erro ao criar relatorio.")
@@ -46,14 +45,12 @@ def menu_editar_relatorio():
         print("Relatorio nao encontrado.")
     else:
         id_paciente = obter_id('Paciente')
-        id_tratamento = obter_id('Tratamento')
         conteudo = obter_conteudo()
         data_criacao = obter_data()
     
-        if verificar_dados_relatorio(session, id_paciente, id_tratamento, data_criacao, conteudo):
+        if verificar_dados_relatorio(session, id_paciente, data_criacao, conteudo):
             relatorio = session.query(Relatorio).filter(Relatorio.ID_Relatorio == id_relatorio).first()
             relatorio.ID_Paciente = id_paciente
-            relatorio.ID_Tratamento = id_tratamento
             relatorio.Conteudo = conteudo
             relatorio.Data_Criacao = data_criacao
             session.commit()
@@ -79,15 +76,14 @@ def menu_listar_relatorios():
     print("\nListar relatorios")
     relatorios = session.query(Relatorio).all()
     for relatorio in relatorios:
-        print(f"ID: {relatorio.ID_Relatorio} | ID Paciente: {relatorio.ID_Paciente} | ID Tratamento: {relatorio.ID_Tratamento} | Data: {relatorio.Data} | Descricao: {relatorio.Descricao}")
+        print(f"ID: {relatorio.ID_Relatorio} | ID Paciente: {relatorio.ID_Paciente} | Data_Criacao: {relatorio.Data_Criacao} | Conteudo: {relatorio.Conteudo}")
     menu_relatorios()
     
-def verificar_dados_relatorio(session, id_paciente, id_tratamento, data_criacao, conteudo):
+def verificar_dados_relatorio(session, id_paciente, data_criacao, conteudo):
     try:
         assert isinstance(id_paciente, int) and id_existe(id_paciente, 'Paciente')
-        assert isinstance(id_tratamento, int) and id_existe(id_tratamento, 'Tratamento')
         data_criacao = datetime.strptime(data_criacao, "%Y-%m-%d").date()
-        assert isinstance(conteudo, str) and len(conteudo) <= DESCRICAO_MAX_LENGTH
+        assert isinstance(conteudo, str) and len(conteudo) <= CONTEUDO_MAX_LENGTH
         
         return True
 

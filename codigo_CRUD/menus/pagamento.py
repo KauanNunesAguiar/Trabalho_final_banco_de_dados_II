@@ -27,13 +27,12 @@ def menu_pagamentos():
 def menu_criar_pagamento():
     print("\nCriar novo pagamento")
     id_paciente = obter_id('Paciente')
-    id_tratamento = obter_id('Tratamento')
     valor = obter_valor()
     data_pagamento = obter_data()
     metodo_pagamento = obter_metodo_pagamento()
     
-    if verificar_dados_pagamento(session, id_paciente, id_tratamento, valor, data_pagamento, metodo_pagamento):
-        pagamento = criar_pagamento(session, id_paciente, id_tratamento, valor, data_pagamento, metodo_pagamento)
+    if verificar_dados_pagamento(session, id_paciente, valor, data_pagamento, metodo_pagamento):
+        pagamento = criar_pagamento(session, id_paciente, valor, data_pagamento, metodo_pagamento)
         print(f"Pagamento criado com sucesso. ID: {pagamento.ID_Pagamento}")
     else:
         print("Erro ao criar pagamento.")
@@ -47,15 +46,13 @@ def menu_editar_pagamento():
         print("Pagamento nao encontrado.")
     else:
         id_paciente = obter_id('Paciente')
-        id_tratamento = obter_id('Tratamento')
         valor = obter_valor()
         data_pagamento = obter_data()
         metodo_pagamento = obter_metodo_pagamento()
         
-        if verificar_dados_pagamento(session, id_paciente, id_tratamento, valor, data_pagamento, metodo_pagamento):
+        if verificar_dados_pagamento(session, id_paciente, valor, data_pagamento, metodo_pagamento):
             pagamento = session.query(Pagamento).filter(Pagamento.ID_Pagamento == id_pagamento).first()
             pagamento.ID_Paciente = id_paciente
-            pagamento.ID_Tratamento = id_tratamento
             pagamento.Valor = valor
             pagamento.Data_Pagamento = data_pagamento
             pagamento.Metodo_Pagamento = metodo_pagamento
@@ -95,13 +92,12 @@ def menu_listar_pagamentos():
     print("\nListar pagamentos")
     pagamentos = session.query(Pagamento).all()
     for pagamento in pagamentos:
-        print(f"ID: {pagamento.ID_Pagamento} | ID Paciente: {pagamento.ID_Paciente} | ID Tratamento: {pagamento.ID_Tratamento} | Valor: {pagamento.Valor} | Data do Pagamento: {pagamento.Data_Pagamento} | Metodo de Pagamento: {retornar_metodo_pagamento(pagamento.Metodo_Pagamento)}")
+        print(f"ID: {pagamento.ID_Pagamento} | ID Paciente: {pagamento.ID_Paciente} | Valor: {pagamento.Valor} | Data do Pagamento: {pagamento.Data_Pagamento} | Metodo de Pagamento: {retornar_metodo_pagamento(pagamento.Metodo_Pagamento)}")
     menu_pagamentos()
     
-def verificar_dados_pagamento(session, id_paciente, id_tratamento, valor, data_pagamento, metodo_pagamento):
+def verificar_dados_pagamento(session, id_paciente, valor, data_pagamento, metodo_pagamento):
     try:
         assert isinstance(id_paciente, int) and id_existe(id_paciente, 'Paciente')
-        assert isinstance(id_tratamento, int) and id_existe(id_tratamento, 'Tratamento')
         assert isinstance(valor, float) and valor >= 0
         data_pagamento = datetime.strptime(data_pagamento, "%Y-%m-%d").date()
         assert isinstance(metodo_pagamento, str) and (metodo_pagamento == 'C' or metodo_pagamento == 'D' or metodo_pagamento == 'E' or metodo_pagamento == 'P')

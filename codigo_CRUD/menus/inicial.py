@@ -9,7 +9,6 @@ opcoes_menu_inicial = [
     "Acessar tabela de tratamentos",
     "Acessar tabela de pagamentos",
     "Acessar tabela de relatorios",
-    "Sair"
 ]
 
 def menu_inicial():
