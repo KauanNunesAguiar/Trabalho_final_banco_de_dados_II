@@ -26,12 +26,12 @@ def menu_tratamentos():
             
 def menu_criar_tratamento():
     print("\nCriar novo tratamento")
-    id_paciente = input("Digite o ID do paciente: ")
-    id_fisioterapeuta = input("Digite o ID do fisioterapeuta: ")
-    data_inicio = input("Digite a data de inicio do tratamento (AAAA-MM-DD): ")
-    data_fim = input("Digite a data de fim do tratamento (AAAA-MM-DD): ")
-    diagnostico = input("Digite o diagnostico: ")
-    procedimentos = input("Digite os procedimentos: ")
+    id_paciente = obter_id('Paciente')
+    id_fisioterapeuta = obter_id('Fisioterapeuta')
+    data_inicio = obter_data_inicio()
+    data_fim = obter_data_fim()
+    diagnostico = obter_diagnostico()
+    procedimentos = obter_procedimentos()
     
     if verificar_dados_tratamento(session, id_paciente, id_fisioterapeuta, data_inicio, data_fim, diagnostico, procedimentos):
         tratamento = criar_tratamento(session, id_paciente, id_fisioterapeuta, data_inicio, data_fim, diagnostico, procedimentos)
@@ -43,16 +43,16 @@ def menu_criar_tratamento():
     
 def menu_editar_tratamento():
     print("\nEditar tratamento")
-    id_tratamento = input("Digite o ID do tratamento: ")
+    id_tratamento = obter_id('Tratamento')
     if not id_existe(id_tratamento, 'Tratamento'):
         print("Tratamento nao encontrado.")
     else:
-        id_paciente = input("Digite o ID do paciente: ")
-        id_fisioterapeuta = input("Digite o ID do fisioterapeuta: ")
-        data_inicio = input("Digite a data de inicio do tratamento (AAAA-MM-DD): ")
-        data_fim = input("Digite a data de fim do tratamento (AAAA-MM-DD): ")
-        diagnostico = input("Digite o diagnostico: ")
-        procedimentos = input("Digite os procedimentos: ")
+        id_paciente = obter_id('Paciente')
+        id_fisioterapeuta = obter_id('Fisioterapeuta')
+        data_inicio = obter_data_inicio()
+        data_fim = obter_data_fim()
+        diagnostico = obter_diagnostico()
+        procedimentos = obter_procedimentos()
     
         if verificar_dados_tratamento(session, id_paciente, id_fisioterapeuta, data_inicio, data_fim, diagnostico, procedimentos):
             tratamento = session.query(Tratamento).filter(Tratamento.ID_Tratamento == id_tratamento).first()
@@ -71,7 +71,7 @@ def menu_editar_tratamento():
     
 def menu_excluir_tratamento():
     print("\nExcluir tratamento")
-    id_tratamento = input("Digite o ID do tratamento: ")
+    id_tratamento = obter_id('Tratamento')
     if not(id_existe(id_tratamento, 'Tratamento')):
         print("Tratamento nao encontrado.")
     else:
@@ -102,4 +102,3 @@ def verificar_dados_tratamento(session, id_paciente, id_fisioterapeuta, data_ini
     except (ValueError, AssertionError) as e:
         session.rollback()
         return None
-

@@ -26,12 +26,13 @@ def menu_usuarios():
 
 def menu_criar_usuario():
     print("\nCriar novo usuario")
-    nome = input("Digite o nome do usuario: ")
+    nome = obter_nome()
     username = input("Digite o username do usuario: ")
     senha = input("Digite a senha do usuario: ")
+    nivel_acesso = obter_nivel_acesso()
     
-    if verificar_dados_usuario(session, nome, username, senha):
-        usuario = criar_usuario(session, nome, username, senha)
+    if verificar_dados_usuario(session, nome, username, senha, nivel_acesso):
+        usuario = criar_usuario(session, nome, username, senha, nivel_acesso)
         print(f"Usuario criado com sucesso. ID: {usuario.ID_Usuario}")
     else:
         print("Erro ao criar usuario.")
@@ -40,29 +41,39 @@ def menu_criar_usuario():
     
 def menu_editar_usuario():
     print("\nEditar usuario")
-    id_usuario = input("Digite o ID do usuario: ")
-    if not id_existe(id_usuario, 'Usuario'):
-        print("Usuario nao encontrado.")
+    id_usuario = obter_id('Usuario')
+    nome = obter_nome()
+    username = input("Digite o username do usuario: ")
+    senha = input("Digite a senha do usuario: ")
+    nivel_acesso = obter_nivel_acesso()
+
+    if verificar_dados_usuario(session, nome, username, senha):
+        usuario = session.query(Usuario).filter(Usuario.ID_Usuario == id_usuario).first()
+        usuario.Nome = nome
+        usuario.Username = username
+        usuario.Senha = senha
+        usuario.Nivel_Acesso = nivel_acesso
+        session.commit()
+        
+        print(f"Usuario editado com sucesso. ID: {usuario.ID_Usuario}")
     else:
-        nome = input("Digite o nome do usuario: ")
-        username = input("Digite o username do usuario: ")
-        senha = input("Digite a senha do usuario: ")
-    
-        if verificar_dados_usuario(session, nome, username, senha):
-            usuario = session.query(Usuario).filter(Usuario.ID_Usuario == id_usuario).first()
-            usuario.Nome = nome
-            usuario.Username = username
-            usuario.Senha = senha
-            session.commit()
-            print(f"Usuario editado com sucesso. ID: {usuario.ID_Usuario}")
-        else:
-            print("Erro ao editar usuario.")
+        print("Erro ao editar usuario.")
         
     menu_usuarios()
     
+def retornar_nivel_acesso(nivel_acesso):
+    if nivel_acesso == 'V':
+        return 'Visitante'
+    elif nivel_acesso == 'B':
+        return 'Basico'
+    elif nivel_acesso == 'A':
+        return 'Avancado'
+    else:
+        return 'Nivel de acesso invalido'
+    
 def menu_excluir_usuario():
     print("\nExcluir usuario")
-    id_usuario = input("Digite o ID do usuario: ")
+    id_usuario = obter_id('Usuario')
     if not(id_existe(id_usuario, 'Usuario')):
         print("Usuario nao encontrado.")
     else:
@@ -76,14 +87,15 @@ def menu_listar_usuarios():
     print("\nListar usuarios")
     usuarios = session.query(Usuario).all()
     for usuario in usuarios:
-        print(f"ID: {usuario.ID_Usuario} | Nome: {usuario.Nome} | Username: {usuario.Username} | Senha: {usuario.Senha}")
+        print(f"ID: {usuario.ID_Usuario} | Nome: {usuario.Nome} | Username: {usuario.Username} | Senha: {usuario.Senha} | Nivel de Acesso: {retornar_nivel_acesso(usuario.Nivel_Acesso)}")
     menu_usuarios()
     
-def verificar_dados_usuario(session, nome, username, senha):
+def verificar_dados_usuario(session, nome, username, senha, nivel_acesso):
     try:
         assert isinstance(nome, str) and len(nome) <= NOME_MAX_LENGTH
         assert isinstance(username, str) and len(username) <= USERNAME_MAX_LENGTH
         assert isinstance(senha, str) and len(senha) <= SENHA_MAX_LENGTH
+        assert isinstance(nivel_acesso, str) and (nivel_acesso == 'V' or nivel_acesso == 'B' or nivel_acesso == 'A') 
         
         return True
 

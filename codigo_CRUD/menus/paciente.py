@@ -26,11 +26,11 @@ def menu_pacientes():
         
 def menu_criar_paciente():
     print("\nCriar novo paciente")
-    nome = input("Digite o nome do paciente: ")
-    data_nascimento = input("Digite a data de nascimento do paciente (AAAA-MM-DD): ")
-    endereco = input("Digite o endereco do paciente: ")
-    telefone = input("Digite o telefone do paciente: ")
-    email = input("Digite o email do paciente: ")
+    nome = obter_nome()
+    data_nascimento = obter_data_nascimento()
+    endereco = obter_endereco()
+    telefone = obter_telefone()
+    email = obter_email()
     
     if verificar_dados_paciente(session, nome, data_nascimento, endereco, telefone, email):
         paciente = criar_paciente(session, nome, data_nascimento, endereco, telefone, email)
@@ -42,15 +42,15 @@ def menu_criar_paciente():
 
 def menu_editar_paciente():
     print("\nEditar paciente")
-    id_paciente = input("Digite o ID do paciente: ")
+    id_paciente = obter_id('Paciente')
     if not id_existe(id_paciente, 'Paciente'):
         print("Paciente nao encontrado.")
     else:
-        nome = input("Digite o nome do paciente: ")
-        data_nascimento = input("Digite a data de nascimento do paciente (AAAA-MM-DD): ")
-        endereco = input("Digite o endereco do paciente: ")
-        telefone = input("Digite o telefone do paciente: ")
-        email = input("Digite o email do paciente: ")
+        nome = obter_nome()
+        data_nascimento = obter_data_nascimento()
+        endereco = obter_endereco()
+        telefone = obter_telefone()
+        email = obter_email()
     
         if verificar_dados_paciente(session, nome, data_nascimento, endereco, telefone, email):
             paciente = session.query(Paciente).filter(Paciente.ID_Paciente == id_paciente).first()
@@ -65,13 +65,35 @@ def menu_editar_paciente():
             print("Erro ao editar paciente.")
         
     menu_pacientes()
+
 def menu_excluir_paciente():
     print("\nExcluir paciente")
-    id_paciente = input("Digite o ID do paciente: ")
+    id_paciente = obter_id('Paciente')
     if not(id_existe(id_paciente, 'Paciente')):
         print("Paciente nao encontrado.")
     else:
         paciente = session.query(Paciente).filter(Paciente.ID_Paciente == id_paciente).first()
+        
+        relatorios_relacionados = session.query(Relatorio).filter_by(ID_Paciente=id_paciente).all()
+        for relatorio in relatorios_relacionados:
+            session.delete(relatorio)
+        
+        pagamentos_relacionados = session.query(Pagamento).filter_by(ID_Paciente=id_paciente).all()
+        for pagamento in pagamentos_relacionados:
+            session.delete(pagamento)
+            
+        agendamentos_relacionados = session.query(Agendamento).filter_by(ID_Paciente=id_paciente).all()
+        for agendamento in agendamentos_relacionados:
+            session.delete(agendamento)
+            
+        historicos_relacionados = session.query(HistoricoMedico).filter_by(ID_Paciente=id_paciente).all()
+        for historico in historicos_relacionados:
+            session.delete(historico)
+            
+        tratamentos_relacionados = session.query(Tratamento).filter_by(ID_Paciente=id_paciente).all()
+        for tratamento in tratamentos_relacionados:
+            session.delete(tratamento)
+            
         session.delete(paciente)
         session.commit()
         print(f"Paciente excluido com sucesso. ID: {id_paciente}")
@@ -89,7 +111,7 @@ def verificar_dados_paciente(session, nome, data_nascimento, endereco, telefone,
         assert isinstance(nome, str) and len(nome) <= NOME_MAX_LENGTH
         data_nascimento = datetime.strptime(data_nascimento, "%Y-%m-%d").date()
         assert isinstance(endereco, str) and len(endereco) <= ENDERECO_MAX_LENGTH
-        assert isinstance(telefone, str) and len(telefone) == TELEFONE_MAX_LENGTH
+        assert isinstance(telefone, str) and len(telefone) <= TELEFONE_MAX_LENGTH
         assert isinstance(email, str) and len(email) <= EMAIL_MAX_LENGTH
         
         return True
@@ -97,4 +119,3 @@ def verificar_dados_paciente(session, nome, data_nascimento, endereco, telefone,
     except (ValueError, AssertionError) as e:
         session.rollback()
         return None
-    

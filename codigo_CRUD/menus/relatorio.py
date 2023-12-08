@@ -26,13 +26,13 @@ def menu_relatorios():
     
 def menu_criar_relatorio():
     print("\nCriar novo relatorio")
-    id_paciente = input("Digite o ID do paciente: ")
-    id_tratamento = input("Digite o ID do tratamento: ")
-    data = input("Digite a data (AAAA-MM-DD): ")
-    descricao = input("Digite a descricao: ")
+    id_paciente = obter_id('Paciente')
+    id_tratamento = obter_id('Tratamento')
+    conteudo = obter_conteudo()
+    data_criacao = obter_data()
     
-    if verificar_dados_relatorio(session, id_paciente, id_tratamento, data, descricao):
-        relatorio = criar_relatorio(session, id_paciente, id_tratamento, data, descricao)
+    if verificar_dados_relatorio(session, id_paciente, id_tratamento, data_criacao, conteudo):
+        relatorio = criar_relatorio(session, id_paciente, id_tratamento, data_criacao, conteudo)
         print(f"Relatorio criado com sucesso. ID: {relatorio.ID_Relatorio}")
     else:
         print("Erro ao criar relatorio.")
@@ -41,21 +41,21 @@ def menu_criar_relatorio():
 
 def menu_editar_relatorio():
     print("\nEditar relatorio")
-    id_relatorio = input("Digite o ID do relatorio: ")
+    id_relatorio = obter_id('Relatorio')
     if not id_existe(id_relatorio, 'Relatorio'):
         print("Relatorio nao encontrado.")
     else:
-        id_paciente = input("Digite o ID do paciente: ")
-        id_tratamento = input("Digite o ID do tratamento: ")
-        data = input("Digite a data (AAAA-MM-DD): ")
-        descricao = input("Digite a descricao: ")
+        id_paciente = obter_id('Paciente')
+        id_tratamento = obter_id('Tratamento')
+        conteudo = obter_conteudo()
+        data_criacao = obter_data()
     
-        if verificar_dados_relatorio(session, id_paciente, id_tratamento, data, descricao):
+        if verificar_dados_relatorio(session, id_paciente, id_tratamento, data_criacao, conteudo):
             relatorio = session.query(Relatorio).filter(Relatorio.ID_Relatorio == id_relatorio).first()
             relatorio.ID_Paciente = id_paciente
             relatorio.ID_Tratamento = id_tratamento
-            relatorio.Data = data
-            relatorio.Descricao = descricao
+            relatorio.Conteudo = conteudo
+            relatorio.Data_Criacao = data_criacao
             session.commit()
             print(f"Relatorio editado com sucesso. ID: {relatorio.ID_Relatorio}")
         else:
@@ -65,7 +65,7 @@ def menu_editar_relatorio():
     
 def menu_excluir_relatorio():
     print("\nExcluir relatorio")
-    id_relatorio = input("Digite o ID do relatorio: ")
+    id_relatorio = obter_id('Relatorio')
     if not(id_existe(id_relatorio, 'Relatorio')):
         print("Relatorio nao encontrado.")
     else:
@@ -82,12 +82,12 @@ def menu_listar_relatorios():
         print(f"ID: {relatorio.ID_Relatorio} | ID Paciente: {relatorio.ID_Paciente} | ID Tratamento: {relatorio.ID_Tratamento} | Data: {relatorio.Data} | Descricao: {relatorio.Descricao}")
     menu_relatorios()
     
-def verificar_dados_relatorio(session, id_paciente, id_tratamento, data, descricao):
+def verificar_dados_relatorio(session, id_paciente, id_tratamento, data_criacao, conteudo):
     try:
         assert isinstance(id_paciente, int) and id_existe(id_paciente, 'Paciente')
         assert isinstance(id_tratamento, int) and id_existe(id_tratamento, 'Tratamento')
-        data = datetime.strptime(data, "%Y-%m-%d").date()
-        assert isinstance(descricao, str) and len(descricao) <= DESCRICAO_MAX_LENGTH
+        data_criacao = datetime.strptime(data_criacao, "%Y-%m-%d").date()
+        assert isinstance(conteudo, str) and len(conteudo) <= DESCRICAO_MAX_LENGTH
         
         return True
 

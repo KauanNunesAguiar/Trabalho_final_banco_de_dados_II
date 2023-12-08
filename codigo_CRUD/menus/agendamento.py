@@ -26,11 +26,11 @@ def menu_agendamentos():
 
 def menu_criar_agendamento():
     print("\nCriar novo agendamento")
-    id_paciente = input("Digite o ID do paciente: ")
-    id_fisioterapeuta = input("Digite o ID do fisioterapeuta: ")
-    data_hora = input("Digite a data e hora do agendamento (AAAA-MM-DD HH:MM:SS): ")
-    duracao = input("Digite a duracao do agendamento: ")
-    observacoes = input("Digite as observacoes do agendamento: ")
+    id_paciente = obter_id('Paciente')
+    id_fisioterapeuta = obter_id('Fisioterapeuta')
+    data_hora = obter_data_hora()
+    duracao = obter_tempo()
+    observacoes = obter_observacoes()
     
     if verificar_dados_agendamento(session, id_paciente, id_fisioterapeuta, data_hora, duracao, observacoes):
         agendamento = criar_agendamento(session, id_paciente, id_fisioterapeuta, data_hora, duracao, observacoes)
@@ -39,19 +39,18 @@ def menu_criar_agendamento():
         print("Erro ao criar agendamento.")
         
     menu_agendamentos()
-    
+
 def menu_editar_agendamento():
     print("\nEditar agendamento")
-    id_agendamento = input("Digite o ID do agendamento: ")
-    if not id_existe(id_agendamento, 'Agendamento'):
-        print("Agendamento nao encontrado.")
-    else:
-        id_paciente = input("Digite o ID do paciente: ")
-        id_fisioterapeuta = input("Digite o ID do fisioterapeuta: ")
-        data_hora = input("Digite a data e hora do agendamento (AAAA-MM-DD HH:MM:SS): ")
-        duracao = input("Digite a duracao do agendamento: ")
-        observacoes = input("Digite as observacoes do agendamento: ")
+    id_agendamento = obter_id('Agendamento')
     
+    try:
+        id_paciente = obter_id('Paciente')
+        id_fisioterapeuta = obter_id('Fisioterapeuta')
+        data_hora = obter_data_hora()
+        duracao = obter_tempo()
+        observacoes = obter_observacoes()
+
         if verificar_dados_agendamento(session, id_paciente, id_fisioterapeuta, data_hora, duracao, observacoes):
             agendamento = session.query(Agendamento).filter(Agendamento.ID_Agendamento == id_agendamento).first()
             agendamento.ID_Paciente = id_paciente
@@ -63,12 +62,14 @@ def menu_editar_agendamento():
             print(f"Agendamento editado com sucesso. ID: {agendamento.ID_Agendamento}")
         else:
             print("Erro ao editar agendamento.")
-        
-    menu_agendamentos()
+    except ValueError:
+        print("Entrada inválida. Certifique-se de fornecer valores inteiros para IDs.")
     
+    menu_agendamentos()
+
 def menu_excluir_agendamento():
     print("\nExcluir agendamento")
-    id_agendamento = input("Digite o ID do agendamento: ")
+    id_agendamento = obter_id('Agendamento')
     if not(id_existe(id_agendamento, 'Agendamento')):
         print("Agendamento nao encontrado.")
     else:
@@ -77,25 +78,27 @@ def menu_excluir_agendamento():
         session.commit()
         print(f"Agendamento excluido com sucesso. ID: {id_agendamento}")
     menu_agendamentos()
-    
+
 def menu_listar_agendamentos():
     print("\nListar agendamentos")
     agendamentos = session.query(Agendamento).all()
     for agendamento in agendamentos:
         print(f"ID: {agendamento.ID_Agendamento} | ID Paciente: {agendamento.ID_Paciente} | ID Fisioterapeuta: {agendamento.ID_Fisioterapeuta} | Data e Hora: {agendamento.Data_Hora} | Duracao: {agendamento.Duracao} | Observacoes: {agendamento.Observacoes}")
     menu_agendamentos()
-    
+
 def verificar_dados_agendamento(session, id_paciente, id_fisioterapeuta, data_hora, duracao, observacoes):
     try:
         assert isinstance(id_paciente, int) and id_existe(id_paciente, 'Paciente')
         assert isinstance(id_fisioterapeuta, int) and id_existe(id_fisioterapeuta, 'Fisioterapeuta')
         data_hora = datetime.strptime(data_hora, "%Y-%m-%d %H:%M:%S")
-        assert isinstance(duracao, int) and duracao > 0
+        duracao = datetime.strptime(duracao, "%H:%M:%S").time()
         assert isinstance(observacoes, str) and len(observacoes) <= OBSERVACOES_MAX_LENGTH
         
         return True
 
-    except (ValueError, AssertionError) as e:
+    except ValueError as e:
         session.rollback()
-        return None
-    
+        return False
+    except AssertionError as e:
+        session.rollback()
+        return False
