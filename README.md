@@ -36,13 +36,13 @@ Abaixo, segue os scripts SQL separados por tipo:
 + Link: [indices.sql](consultasComIndices)
 + Responsável: @L3mitch
 #### Triggers 
-+ Link: [triggers.sql](scripts_sql/triggers.sql)
++ Link: [triggers.sql](scripts_sql/Final.sql)
 - Responsável: @L3mitch
 #### Stored Procedures
-+ Link: [stored_procedures.sql](scripts_sql/stored_procedures.sql)
++ Link: [stored_procedures.sql](scripts_sql/Final.sql)
 + Responsável: @L3mitch
 #### Functions 
-+ Link: [functions.sql](scripts_sql/functions.sql)
++ Link: [functions.sql](scripts_sql/Final.sql)
 + Responsável: @L3mitch
 
 ### Código Fonte do CRUD
